@@ -1,0 +1,18 @@
+.profilePostItem {
+    padding: 1rem;
+    border: 1px solid gray;
+    margin-top: 1rem;
+    transition: 0.4s;
+}
+.profilePostItem:hover > .content > h3 {
+    color: rgba(55, 66, 250, 0.8);
+}
+.comment_btn {
+    color: rgba(55, 66, 250, 0.8);
+    cursor: pointer;
+}
+.profilePostItem > .footer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
