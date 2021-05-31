@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import PostDetail from './components/PostDetail/PostDetail';
 import Home from './pages/Home';
 import Profile from './pages/Profile';
 
@@ -8,6 +9,8 @@ const userId = 2;
 
 function App() {
     const [user, setUser] = useState({});
+	const [userPosts, setUserPosts] = useState([]);
+
     useEffect(() => {
         const fetchUser = async () => {
             const res = await fetch(`https://jsonplaceholder.typicode.com/users/${userId}`);
@@ -18,11 +21,14 @@ function App() {
     }, [ ]);
 
     return (
-        <MyContext.Provider value={{ userInfo: [user] }}>
+        <MyContext.Provider value={{ userInfo: [user], userPost: [userPosts, setUserPosts] }}>
             <Router>
                 <Switch>
                     <Route exact path="/">
                         <Home />
+                    </Route>
+                    <Route exact path="/post/:postId">
+                        <PostDetail />
                     </Route>
                     <Route path="/users">
                         <h1>hello</h1>

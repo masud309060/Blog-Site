@@ -1,0 +1,26 @@
+.postDetail {
+    background-color: white;
+    max-width: 800px;
+    margin: 1rem auto;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    padding: 1rem;
+}
+.postDetail_content {
+    padding: 1rem;
+}
+.postDetail_comments {
+    padding: 0 1rem;
+    color: #666;
+}
+.postDetail_content > h3 {
+    border-bottom: 1px solid gray;
+    padding-bottom: 5px;
+    color: rgba(55, 66, 250, 0.8);
+}
+.commentItem {
+    padding: 0 1rem;
+}
+.commentItem > strong {
+    color: #555;
+}

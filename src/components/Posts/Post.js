@@ -13,8 +13,10 @@ const Post = () => {
             .then((data) => {
                 const reqPost = data.slice(offset, offset + 10);
                 setPosts(reqPost);
+                console.log(reqPost)
             });
-    });
+            window.scrollTo(0, 0)
+    }, [offset]);
     return (
         <div>
             <div className="container py-3 posts">
@@ -25,7 +27,7 @@ const Post = () => {
                     <Button
                         disabled={offset >= 90}
                         className="ml-auto mr-3"
-                        onClick={() => setOffset(offset + 10)}
+                        onClick={() => setOffset(offset + 10)} 
                     >
                         load more
                     </Button>
