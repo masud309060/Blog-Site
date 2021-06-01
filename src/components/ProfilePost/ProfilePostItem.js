@@ -3,7 +3,7 @@ import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "./ProfilePostItem.css";
 
-const ProfilePostItem = ({ post }) => {
+const ProfilePostItem = ({ post, updatePostHandler, deletePostHandler }) => {
 	const { title, body, id } = post;
 	return (
 		<div className="profilePostItem m-3">
@@ -17,9 +17,9 @@ const ProfilePostItem = ({ post }) => {
 				<Link to={`post/${id}`}>
 					<span className="comment_btn">Comment</span>
 				</Link>
-				<div className="ProfilePostItem_btn">
-					<Button variant="primary">Update</Button>{" "}
-					<Button variant="danger">Delete</Button>
+				<div className="ProfilePostItem_btn">  
+					<Button onClick={() => updatePostHandler(id, title, body)} variant="primary">Update</Button>{" "}
+					<Button onClick={() => deletePostHandler(id)} variant="danger">Delete</Button>
 				</div>
 			</div>
 		</div>

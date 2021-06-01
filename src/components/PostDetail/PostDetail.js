@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Button } from "react-bootstrap";
 import { useParams } from "react-router";
 import './PostDetail.css';
 
@@ -20,8 +21,12 @@ const PostDetail = () => {
 			.then((res) => res.json())
 			.then((cm) => setComments(cm));
 	}, []);
+	const goBack = () => {
+		window.history.back();
+	  }
 	return (
 		<div className="postDetail">
+			<Button onClick={goBack} variant="info" size="sm"> &larr; Go Back</Button>
 			<div className="postDetail_content">
                 <h3>{post.title}</h3>
                 <p>{post.body}</p>
@@ -29,7 +34,7 @@ const PostDetail = () => {
             <div className="postDetail_comments">
                 <h5>Comments</h5>
                 {comments.map(item =>
-                    <div className="commentItem">
+                    <div className="commentItem" key={item.id}>
                         <strong>{item.email}</strong>
                         <p>{item.body}</p>
                     </div>
