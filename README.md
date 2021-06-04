@@ -1,6 +1,6 @@
-## **Blog-site**  
+# **Blog-site**  
 
-### [Live link](https://blog-site-pro.netlify.app/)
+### [Live link &rarr;](https://blog-site-pro.netlify.app/)
 
 ### **Todo** ( *Project feature* )
 1. As a user I want to see all the “Posts” **( section done )**
