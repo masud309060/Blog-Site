@@ -1,9 +1,12 @@
 import React from "react";
 import { Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import "./ProfilePostItem.css";
 
 const ProfilePostItem = ({ post, updatePostHandler, deletePostHandler }) => {
+	const history = useHistory();
+	const { userId } = useParams();
+	console.log(userId)
 	const { title, body, id } = post;
 	return (
 		<div className="profilePostItem m-3">
@@ -14,13 +17,28 @@ const ProfilePostItem = ({ post, updatePostHandler, deletePostHandler }) => {
 				<p>{body}</p>
 			</div>
 			<div className="footer">
-				<Link to={`post/${id}`}>
-					<span className="comment_btn">Comment</span>
-				</Link>
-				<div className="ProfilePostItem_btn">  
-					<Button onClick={() => updatePostHandler(id, title, body)} variant="primary">Update</Button>{" "}
-					<Button onClick={() => deletePostHandler(id)} variant="danger">Delete</Button>
-				</div>
+				<span
+					onClick={() => history.push(`/post/${id}`)}
+					className="comment_btn"
+				>
+					Comment
+				</span>
+				{ +userId === 2 && (
+					<div className="ProfilePostItem_btn">
+						<Button
+							onClick={() => updatePostHandler(id, title, body)}
+							variant="primary"
+						>
+							Update
+						</Button>{" "}
+						<Button
+							onClick={() => deletePostHandler(id)}
+							variant="danger"
+						>
+							Delete
+						</Button>
+					</div>
+				)}
 			</div>
 		</div>
 	);

@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import PostDetail from './components/PostDetail/PostDetail';
 import Home from './pages/Home';
 import Profile from './pages/Profile';
+import Users from './pages/Users';
 
 export const MyContext = createContext();
 
@@ -17,13 +18,13 @@ function App() {
                     <Route exact path="/">
                         <Home />
                     </Route>
-                    <Route exact path="/post/:postId">
+                    <Route path="/users">
+                        <Users /> 
+                    </Route>
+                    <Route path="/post/:postId">
                         <PostDetail />
                     </Route>
-                    <Route path="/users">
-                        <h1>hello</h1>
-                    </Route>
-                    <Route path="/profile">
+                    <Route path="/profile/:userId">
                         <Profile />
                     </Route>
                 </Switch>

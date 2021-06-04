@@ -1,0 +1,69 @@
+.usersTable_wrapper {
+    max-width: 1130px;
+    margin: 1rem auto;
+    padding: 1rem;
+    background-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.4);
+}
+.usersTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+@media (max-width: 575px) {
+    .usersTable {
+        font-size: 80%;
+    }
+    .usersTable th, .usersTable td {
+        padding: 0.5rem;
+    }
+}
+@media (max-width: 375px) {
+    .usersTable {
+        font-size: 65%;
+    }
+    .usersTable th, .usersTable td {
+        padding: 0.25rem;
+    }
+    .usersTable th {
+        padding-bottom: 0.25rem;
+        padding-top: 0.25rem;
+    }
+}
+.usersTable th, .usersTable td {
+    border: 1px solid lightgray;
+    padding: 0.75rem 0.5rem;
+}
+.usersTable th {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    background-color: rgba(55, 66, 250, 0.5);
+}
+.usersTable tr:nth-child(even) {
+    background-color: #dddddd75;
+}
+
+/* filter table */
+.filter_table {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    margin: 1rem 0;
+}
+.filter_table > div {
+    display: block;
+}
+@media (max-width: 576px) {
+    .filter_table > input {
+        width: 100% !important;
+        margin-top: 0.5rem;
+    }
+}
+.filter_table_select {
+    display: inline-block;
+    padding: 2px;
+    min-width: 80px;
+    margin-right: 10px;
+    outline: 0;
+    background: none;
+}

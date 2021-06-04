@@ -1,0 +1,13 @@
+.table_pagination {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 1rem;
+}
+.table_page_item_change {
+    margin-right: 1rem;
+}
+.table_page_item_change > select {
+    padding: 4px;
+    outline: 0;
+    background: none;
+}

@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
+import { useParams } from "react-router";
 import { MyContext } from "../../App";
 import "./ProfilePost.css";
 import ProfilePostItem from "./ProfilePostItem";
@@ -9,15 +10,13 @@ const ProfilePost = () => {
 	const [userPosts, setUserPosts] = userPost;
 	const [showForm, setShowForm] = useState(false);
 	const [isUpdate, setIsUpdate] = useState(false);
-	const [postDetails, setPostDetails] = useState({
-		title: "",
-		body: "",
-		userId: 2,
-	});
-	const userId = 2;
+	const [postDetails, setPostDetails] = useState({});
+	const { userId } = useParams();
+	
 	useEffect(() => {
 		fetchPost();
-	}, []);
+		window.scrollTo(0, 0);
+	}, [userId]);
 
 	const fetchPost = async () => {
 		const res = await fetch(
@@ -79,6 +78,7 @@ const ProfilePost = () => {
 		setPostDetails({ ...postDetails, id, title, body });
 		setShowForm(true);
 		setIsUpdate(true);
+		window.scrollTo(0, 0);
 	};
 	const deletePostHandler = (id) => {
 		fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
@@ -96,13 +96,15 @@ const ProfilePost = () => {
 
 	return (
 		<div className="container py-3 profilePost">
-			<Button
-				onClick={() => setShowForm(!showForm)}
-				className="d-block ml-auto"
-				size="lg"
-			>
-				{showForm ? "Discard" : "Upload a new post"}
-			</Button>
+			{+userId === 2 && (
+				<Button
+					onClick={() => setShowForm(!showForm)}
+					className="d-block ml-auto"
+					size="lg"
+				>
+					{showForm ? "Discard" : "Upload a new post"}
+				</Button>
+			)}
 			{showForm && (
 				<Form onSubmit={handleSubmit}>
 					<Form.Group controlId="formBasicEmail">
@@ -132,8 +134,10 @@ const ProfilePost = () => {
 					</Button>
 				</Form>
 			)}
-			
-			<div> {/* list of user post */}
+
+			<div>
+				{" "}
+				{/* list of user post */}
 				{userPosts?.map((item) => (
 					<ProfilePostItem
 						post={item}
