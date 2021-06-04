@@ -124,7 +124,7 @@ const UsersTable = () => {
 
 	// change page view ;
 	const handlePageChange = (page) => {
-		if (page != currentPage) {
+		if (+page !== currentPage) {
 			setCurrentPage(page);
 			setCurrentIndex(page * itemPerPage - itemPerPage);
 		}

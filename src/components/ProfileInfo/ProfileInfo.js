@@ -19,7 +19,7 @@ const ProfileInfo = () => {
 
 	return (
 		<div className="profileInfo container">
-			{/* <div className="profile_photo">{user && user.name.slice(0,1)}</div> */}
+			<div className="profile_photo">{user && user.name?.charAt(0)}</div>
 			<div>
 				<strong>{user.name}</strong> <br />
 				<small>{user.email}</small>
