@@ -5,7 +5,7 @@ import PostItem from "./PostItem";
 
 const Post = () => {
 	const [posts, setPosts] = useState([]);
-	const [offset, setOffset] = useState(0);
+	const [endIndex, setEndIndex] = useState(10);
 	useEffect(() => {
 		const url = "https://jsonplaceholder.typicode.com/posts";
 		if (!posts.length) {
@@ -13,22 +13,22 @@ const Post = () => {
 				.then((res) => res.json())
 				.then((data) => setPosts(data));
 		}
-		window.scrollTo(0, 0);
-	}, [offset]);
+	}, []);
 
 	return (
 		<div>
 			<div className="container py-3 posts">
 				<div className="d-flex flex-column">
-					{posts.slice(offset, offset + 10).map((item) => (
+					{posts.slice(0, endIndex).map((item) => (
 						<PostItem post={item} key={item.id} />
 					))}
 					<Button
-						disabled={offset >= 90}
-						className="ml-auto mr-3"
-						onClick={() => setOffset(offset + 10)}
+						disabled={endIndex >= posts.length}
+						className="ml-auto mr-3 px-3"
+						size="sm"
+						onClick={() => setEndIndex(endIndex + 10)}
 					>
-						load more
+						Load more post &rarr;
 					</Button>
 				</div>
 			</div>

@@ -1,18 +1,23 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Button, Form } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import { useParams } from "react-router";
 import { MyContext } from "../../App";
+import ProfilePostPagination from "../ProfilePostPagination/ProfilePostPagination";
+import PostForm from "./PostForm";
 import "./ProfilePost.css";
 import ProfilePostItem from "./ProfilePostItem";
 
 const ProfilePost = () => {
-	const { userPost } = useContext(MyContext);
+	const { userPost, myUserId } = useContext(MyContext);
 	const [userPosts, setUserPosts] = userPost;
 	const [showForm, setShowForm] = useState(false);
 	const [isUpdate, setIsUpdate] = useState(false);
 	const [postDetails, setPostDetails] = useState({});
+	const [itemPerPage] = useState(6);
+	const [currentIndex, setCurrentIndex] = useState(0);
+	const [currentPage, setCurrentPage] = useState(1);
 	const { userId } = useParams();
-	
+
 	useEffect(() => {
 		fetchPost();
 		window.scrollTo(0, 0);
@@ -94,9 +99,14 @@ const ProfilePost = () => {
 			.catch((err) => alert(err.message));
 	};
 
+	const handlePageChange = (page) => {
+		setCurrentPage(page);
+		setCurrentIndex(page * itemPerPage - itemPerPage);
+	};
+
 	return (
 		<div className="container py-3 profilePost">
-			{+userId === 2 && (
+			{+userId === myUserId && (
 				<Button
 					onClick={() => setShowForm(!showForm)}
 					className="d-block ml-auto"
@@ -106,46 +116,33 @@ const ProfilePost = () => {
 				</Button>
 			)}
 			{showForm && (
-				<Form onSubmit={handleSubmit}>
-					<Form.Group controlId="formBasicEmail">
-						<Form.Label>Post Title</Form.Label>
-						<Form.Control
-							onChange={handleChange}
-							name="title"
-							defaultValue={postDetails.title}
-							type="type"
-							placeholder="Post title "
-							required
-						/>
-					</Form.Group>
-					<Form.Group controlId="exampleForm.ControlTextarea1">
-						<Form.Label>Description Body</Form.Label>
-						<Form.Control
-							onChange={handleChange}
-							name="body"
-							defaultValue={postDetails.body}
-							as="textarea"
-							rows={5}
-							required
-						/>
-					</Form.Group>
-					<Button variant="primary" type="submit">
-						{showForm && isUpdate ? "Update" : "Post"}
-					</Button>
-				</Form>
+				<PostForm
+					postDetails={postDetails}
+					isUpdate={isUpdate}
+					showForm={showForm}
+					handleSubmit={handleSubmit}
+					handleChange={handleChange}
+				/>
 			)}
 
 			<div>
-				{" "}
-				{/* list of user post */}
-				{userPosts?.map((item) => (
-					<ProfilePostItem
-						post={item}
-						key={item.id}
-						updatePostHandler={updatePostHandler}
-						deletePostHandler={deletePostHandler}
-					/>
-				))}
+				{userPosts
+					.slice(currentIndex, currentPage * itemPerPage)
+					.map((item) => (
+						<ProfilePostItem
+							post={item}
+							key={item.id}
+							updatePostHandler={updatePostHandler}
+							deletePostHandler={deletePostHandler}
+						/>
+					))}
+			</div>
+			<div className="profile_post_pagination">
+				<ProfilePostPagination
+					userPosts={userPosts}
+					itemPerPage={itemPerPage}
+					handlePageChange={handlePageChange}
+				/>
 			</div>
 		</div>
 	);

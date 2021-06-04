@@ -4,6 +4,21 @@
     transition: 0.4s;
     background-color: white;
     box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.2);
+    border-left: 8px solid gray;
+    transition: 0.5s;
+}
+.profilePostItem:hover {
+    border-color: rgba(55, 66, 250, 0.8);
+}
+.post_id {
+    background-color: gray;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    border-radius: 50%;
 }
 .profilePostItem:hover > .content > h3 {
     color: rgba(55, 66, 250, 0.8);

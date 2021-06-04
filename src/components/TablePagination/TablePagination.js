@@ -1,7 +1,12 @@
 import React from "react";
-import './TablePagination.css';
+import "./TablePagination.css";
 
-const TablePagination = ({ handlePageChange, userList, itemPerPage, handlePageItemChange }) => {
+const TablePagination = ({
+	handlePageChange,
+	userList,
+	itemPerPage,
+	handlePageItemChange,
+}) => {
 	const totalPage = Math.ceil(userList.length / itemPerPage);
 	let pageNumbers = [];
 	for (let i = 1; i <= totalPage; i++) {
@@ -18,6 +23,7 @@ const TablePagination = ({ handlePageChange, userList, itemPerPage, handlePageIt
 					<option value={userList.length}>All</option>
 				</select>
 			</div>
+
 			<nav aria-label="Page navigation example">
 				<ul className="pagination">
 					<li className="page-item">

@@ -8,11 +8,11 @@ import Users from './pages/Users';
 export const MyContext = createContext();
 
 function App() {
-    const [user, setUser] = useState({});
+    const [myUserId] = useState(2);
 	const [userPosts, setUserPosts] = useState([]);
 
     return (
-        <MyContext.Provider value={{ userInfo: [user, setUser], userPost: [userPosts, setUserPosts] }}>
+        <MyContext.Provider value={{ myUserId: myUserId, userPost: [userPosts, setUserPosts] }}>
             <Router>
                 <Switch>
                     <Route exact path="/">

@@ -4,3 +4,9 @@
 .profilePost > form {
     padding: 1rem;
 }
+.profile_post_pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 1rem;
+}

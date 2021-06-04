@@ -1,6 +1,11 @@
 import React from "react";
+import "./TableFilter.css";
 
-const TableFilter = ({handleSortUser, handleOrderUser, handleChangeSearch}) => {
+const TableFilter = ({
+	handleSortUser,
+	handleOrderUser,
+	handleChangeSearch,
+}) => {
 	return (
 		<div className="filter_table">
 			<div>

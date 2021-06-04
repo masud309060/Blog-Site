@@ -6,7 +6,9 @@ import "./UsersTable.css";
 
 const UsersTable = () => {
 	const [allUser, setAllUser] = useState([]);
-	const [itemPerPage, setItemPerPage] = useState(3);
+	const [itemPerPage, setItemPerPage] = useState(
+		sessionStorage?.getItem("pageItem") || 3
+	);
 	const [currentIndex, setCurrentIndex] = useState(0);
 	const [currentPage, setCurrentPage] = useState(1);
 	const [userState, setUserState] = useState({
@@ -19,7 +21,11 @@ const UsersTable = () => {
 		let url = "https://jsonplaceholder.typicode.com/users";
 		fetchAllUsers(url).then((value) => {
 			setAllUser(value);
-			setUserState({ ...userState, userList: value });
+			setUserState({
+				...userState,
+				userList:
+					JSON.parse(sessionStorage.getItem("userlist")) || value,
+			});
 		});
 	}, []);
 
@@ -51,6 +57,8 @@ const UsersTable = () => {
 				}
 			}),
 		});
+		let user = userState.userList.slice();
+		sessionStorage.setItem("userlist", JSON.stringify(user));
 	};
 
 	const handleOrderUser = (e) => {
@@ -90,6 +98,8 @@ const UsersTable = () => {
 				}
 			}),
 		});
+		let user = userState.userList.slice();
+		sessionStorage.setItem("userlist", JSON.stringify(user));
 	};
 
 	const handleChangeSearch = (e) => {
@@ -114,12 +124,16 @@ const UsersTable = () => {
 
 	// change page view ;
 	const handlePageChange = (page) => {
-		setCurrentPage(page);
-		setCurrentIndex(page * itemPerPage - itemPerPage);
+		if (page != currentPage) {
+			setCurrentPage(page);
+			setCurrentIndex(page * itemPerPage - itemPerPage);
+		}
 	};
+
 	const handlePageItemChange = (e) => {
-		console.log(e.target.value);
-		setItemPerPage(e.target.value);
+		let value = e.target.value;
+		setItemPerPage(value);
+		sessionStorage.setItem("pageItem", value);
 	};
 
 	return (
@@ -143,7 +157,9 @@ const UsersTable = () => {
 						.map((item) => (
 							<tr key={item.id}>
 								<td>
-									<Link to={`profile/${item.id}`}>{item.name}</Link>
+									<Link to={`profile/${item.id}`}>
+										{item.name}
+									</Link>
 								</td>
 								<td>{item.email}</td>
 								<td>{item.website}</td>

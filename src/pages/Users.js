@@ -6,7 +6,7 @@ const Users = () => {
 	return (
 		<>
 			<NavBar />
-            <UsersTable /> 
+			<UsersTable />
 		</>
 	);
 };

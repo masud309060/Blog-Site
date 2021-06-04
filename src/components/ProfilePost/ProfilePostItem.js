@@ -1,18 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Button } from "react-bootstrap";
 import { useHistory, useParams } from "react-router-dom";
+import { MyContext } from "../../App";
 import "./ProfilePostItem.css";
 
 const ProfilePostItem = ({ post, updatePostHandler, deletePostHandler }) => {
+	const { myUserId } = useContext(MyContext);
 	const history = useHistory();
 	const { userId } = useParams();
-	console.log(userId)
 	const { title, body, id } = post;
 	return (
 		<div className="profilePostItem m-3">
 			<div className="content">
+				<div className="post_id">{id}</div>
 				<h3>
-					{title} ### {id}
+					{title}
 				</h3>
 				<p>{body}</p>
 			</div>
@@ -23,7 +25,7 @@ const ProfilePostItem = ({ post, updatePostHandler, deletePostHandler }) => {
 				>
 					Comment
 				</span>
-				{ +userId === 2 && (
+				{+userId === myUserId && (
 					<div className="ProfilePostItem_btn">
 						<Button
 							onClick={() => updatePostHandler(id, title, body)}

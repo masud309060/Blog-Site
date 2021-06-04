@@ -5,11 +5,14 @@
     cursor: pointer;
     background-color: white;
     box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.2);
+    border-left: 8px solid gray;
 }
+
 .postItem:hover {
     border-color: rgba(55, 66, 250, 0.5);
     box-shadow: 2px 2px 4px rgba(83, 82, 237, 0.5);
 }
+
 .postItem:hover > .postItem_content > h3 {
     color: rgba(55, 66, 250, 0.8);
 }

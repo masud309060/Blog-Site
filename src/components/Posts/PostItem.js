@@ -8,8 +8,9 @@ const PostItem = ({ post }) => {
         <Link to={`/post/${id}`} style={{textDecoration: 'inherit', color: 'inherit'}}>
             <div className="postItem m-3">
                 <div className="postItem_content">
+                    <div className="post_id">{id}</div>
                     <h3>
-                        {title} --- {id}
+                        {title}
                     </h3>
                     <p>{body}</p>
                 </div>

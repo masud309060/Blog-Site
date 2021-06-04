@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Nav, Navbar } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { MyContext } from "../../App";
 
 const NavBar = () => {
 	const [tab, setTab] = useState("");
-	let userId = 2;
+	const { myUserId } = useContext(MyContext);
+
 	return (
 		<>
 			<Navbar
@@ -16,19 +18,13 @@ const NavBar = () => {
 					className="justify-content-end container"
 					activeKey="/home"
 				>
-					<Nav.Item>
-						<Nav.Link
-							onClick={() => setTab("")}
-							active={tab === ""}
-							as={Link}
-							to="/"
-						>
+					<Nav.Item onClick={() => setTab("")}>
+						<Nav.Link active={tab === ""} as={Link} to="/">
 							Blogs
 						</Nav.Link>
 					</Nav.Item>
-					<Nav.Item>
+					<Nav.Item onClick={() => setTab("users")}>
 						<Nav.Link
-							onClick={() => setTab("users")}
 							active={tab === "users"}
 							as={Link}
 							to="/users"
@@ -36,12 +32,11 @@ const NavBar = () => {
 							Users
 						</Nav.Link>
 					</Nav.Item>
-					<Nav.Item>
+					<Nav.Item onClick={() => setTab("profile")}>
 						<Nav.Link
-							onClick={() => setTab("profile")}
 							active={tab === "profile"}
 							as={Link}
-							to={`/profile/${userId}`}
+							to={`/profile/${myUserId}`}
 						>
 							Profile
 						</Nav.Link>
